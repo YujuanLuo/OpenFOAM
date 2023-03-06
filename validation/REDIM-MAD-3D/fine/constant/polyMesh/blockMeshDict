@@ -1,0 +1,144 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      http://www.foam-extend.org            |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+convertToMeters 1;
+zMin -0.0003059411708;
+zMax 0.0003059411708;
+x0 0.001;
+x1 0.005;
+x 0.0055;
+x2 0.006;
+y 0.025;
+vertices
+(
+// Block 0
+    (0.0  0.013  $zMin) //0
+    ($x0   0.013  $zMin) //1
+    ($x0   $y   $zMin) //2
+    (0.0  $y   $zMin) //3
+    (0.0  0.013  $zMax) //4
+    ($x0  0.013   $zMax) //5
+    ($x0  $y    $zMax) //6
+    (0.0 $y    $zMax) //7
+
+// Block 1
+    ($x1   0.013  $zMin) //8
+    ($x1   $y   $zMin) //9
+    ($x1   0.013   $zMax) //10
+    ($x1   $y    $zMax) //11
+
+// Block 2
+    ($x   0.013  $zMin) //12
+    ($x   $y   $zMin) //13
+    ($x   0.013   $zMax) //14
+    ($x   $y    $zMax) //15
+
+// Block 3
+    ($x2   0.013  $zMin) //16
+    ($x2   $y   $zMin) //17
+    ($x2  0.013   $zMax) //18
+    ($x2  $y    $zMax) //19
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) (40 1200 1) simpleGrading (4 1 1)
+    hex (1 8 9 2 5 10 11 6) (80 1200 1) simpleGrading (1 1 1)
+    hex (8 12 13 9 10 14 15 11) (10 1200 1) simpleGrading (1 1 1)
+    hex (12 16 17 13 14 18 19 15) (10 1200 1) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    inlet1
+    {
+        type patch;
+        faces
+        (
+            (0 1 5 4)
+            (1 8 10 5)
+        );
+    }
+    inlet2
+    {
+        type patch;
+        faces
+        (
+            (8 12 14 10)
+        );
+    }
+    inlet3
+    {
+        type patch;
+        faces
+        (
+            (12 16 18 14)
+        );
+    }
+
+    edge
+    {
+        type wall;
+        faces
+        (
+   	    (16 17 19 18)
+        );
+    }
+    outlet
+    {
+	type patch;
+	faces
+	(
+	   (3 7 6 2)
+       	   (2 6 11 9)
+           (9 11 15 13)
+	   (13 15 19 17)
+	);
+    }
+    wall
+    {
+        type wall;
+        faces
+        (
+            (0 3 7 4)
+        );
+    }
+    frontAndBack
+    {
+        type empty;
+        faces
+        (
+            (0 1 2 3)
+            (1 8 9 2)
+            (4 5 6 7)
+            (5 10 11 6)
+            (8 9 13 12)
+            (10 11 15 14)
+            (12 16 17 13)
+	    (14 18 19 15)
+        );
+    }
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //
