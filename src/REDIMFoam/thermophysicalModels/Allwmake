@@ -1,0 +1,19 @@
+#!/bin/sh
+cd "${0%/*}" || exit                                # Run from this directory
+. ${WM_PROJECT_DIR:?}/wmake/scripts/AllwmakeParseArguments
+
+#------------------------------------------------------------------------------
+
+wmake $targetType basic
+wmake $targetType reactionThermo
+#wmake $targetType laminarFlameSpeed
+wmake $targetType chemistryModel
+wmake $targetType SLGThermo
+
+
+wmake $targetType solidThermo
+wmake $targetType solidChemistryModel
+
+wmake $targetType radiation
+
+#------------------------------------------------------------------------------

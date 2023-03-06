@@ -1,0 +1,9 @@
+LESdelta = LES/LESdeltas
+LESfilters = LES/LESfilters
+wallFunctions = derivedFvPatchFields/wallFunctions
+nutWallFunctions = $(wallFunctions)/nutWallFunctions
+epsilonWallFunctions = $(wallFunctions)/epsilonWallFunctions
+omegaWallFunctions = $(wallFunctions)/omegaWallFunctions
+kqRWallFunctions = $(wallFunctions)/kqRWallFunctions
+RASBCs = RAS/derivedFvPatchFields
+LIB = $(FOAM_USER_LIBBIN)/libREDIMturbulenceModels

@@ -1,0 +1,19 @@
+#!/bin/sh
+cd "${0%/*}" || exit                                # Run from this directory
+
+#------------------------------------------------------------------------------
+
+wclean basic
+wclean reactionThermo
+wclean laminarFlameSpeed
+wclean chemistryModel
+wclean SLGThermo
+
+
+wclean solidThermo
+wclean solidChemistryModel
+
+wclean radiation
+
+wcleanLnIncludeAll
+#------------------------------------------------------------------------------

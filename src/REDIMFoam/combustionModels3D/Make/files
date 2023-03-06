@@ -1,0 +1,17 @@
+combustionModel/combustionModel.C
+CombustionModel/CombustionModel/CombustionModels.C
+
+Tabulation/Interpolation/linearInterpolation/linearInterpolation2D.C
+Tabulation/Interpolation/linearInterpolation/linearInterpolation3D.C
+Tabulation/Table/Table2D.C
+Tabulation/Table/Table3D.C
+Tabulation/tableSolver/tableSolver2D.C
+Tabulation/tableSolver/tableSolver3D.C
+
+3DREDIMModel/REDIMModels.C
+
+derivedFvPatchFields/updateWallTheta1/updateWallTheta1FvPatchScalarField.C
+derivedFvPatchFields/updateWallTheta2/updateWallTheta2FvPatchScalarField.C
+derivedFvPatchFields/updateWallTheta3/updateWallTheta3FvPatchScalarField.C
+
+LIB = $(FOAM_USER_LIBBIN)/libREDIM3DcombustionModels
