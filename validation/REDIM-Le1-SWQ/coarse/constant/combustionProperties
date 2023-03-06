@@ -1,0 +1,65 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      combustionProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+combustionModel  REDIMModel;
+
+active  true;
+
+nDims   2;
+
+REDIMModelCoeffs
+{
+}
+
+species
+26
+(
+N2                       
+H2                       
+H                        
+O2                       
+O                        
+H2O                      
+OH                       
+H2O2                     
+HO2                      
+CO                       
+CO2                      
+CH4                      
+CH3                      
+CH2                      
+CH2(S)                   
+CH                       
+CH3O2H                   
+CH3O2                    
+CH3OH                    
+CH3O                     
+CH2O                     
+HCO                      
+C2H6                     
+C2H5                     
+C2H4                     
+C2H3 
+);
+
+gridResolution coarse;
+
+tableForm flip;
+
+nSpec 27;
+
+// ************************************************************************* //
