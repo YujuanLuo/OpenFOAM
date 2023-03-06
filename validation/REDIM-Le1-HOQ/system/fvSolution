@@ -1,0 +1,104 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    rho
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-08;
+        relTol          0;
+    }
+
+    rhoFinal
+    {
+        $rho;
+        relTol          0;
+    }
+
+    p
+    {
+        solver          GAMG;
+        tolerance       1e-08;
+        relTol          0.001;
+        smoother        GaussSeidel;
+        nPreSweeps      0;
+        nPostSweeps     2;
+        nFinestSweeps   2;
+        cacheAgglomeration on;
+        nCellsInCoarsestLevel 10;
+        agglomerator    faceAreaPair;
+        mergeLevels     1;
+    }
+
+    pFinal
+    {
+        $p;
+        relTol          0;
+    }
+
+    U
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+	nSweeps		2;
+	preconditioner	DILU;
+        tolerance       1e-10;
+        relTol          1e-3;
+    }
+
+    UFinal
+    {
+	$U;
+	relTol		0;
+    }
+
+    "(theta1|theta2)"
+    {
+        solver		PBiCGStab;
+	preconditioner	DILU;
+        tolerance       1e-30;
+        relTol          0;
+	minIter		1;
+    }
+
+    "(theta1|theta2)Final"
+    {
+        $theta1;
+        relTol          0;
+    }
+
+}
+
+PIMPLE
+{
+    transonic			no;
+    nCorrectors     		3;//2;//PISO correction times  while SIMPLE always 1;
+    nOuterCorrectors 		1;//30;//30;//2;//in order to increase the stability you will need to add more corrector steps
+    nNonOrthogonalCorrectors 	1;
+    momentumPredictor 		yes;
+    rhoMax	1.5;
+    rhoMin	0.1;
+    pMin	0.5e5;
+    pMax	2e5;
+    pRefCell	0;
+    pRefValue	101325;
+}
+
+
+// ************************************************************************* //
